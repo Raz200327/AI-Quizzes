@@ -46,7 +46,7 @@ class MainQuiz:
 
     def generate_questions(self, paragraph, qamount):
 
-        openai.api_key = "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"
+        openai.api_key = os.environ.get("OPENAIKEY")
         question = f"Write 10 short quiz questions from the lesson transcript below with simple answers and format the quiz with the Q and A separated by an @ symbol:\n\n{paragraph}\n\n"
         quiz_questions = openai.Completion.create(model="text-davinci-003", prompt=question, max_tokens=500, temperature=0)
         return quiz_questions["choices"][0]["text"].replace("\n", "")
