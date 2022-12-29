@@ -239,7 +239,7 @@ def quiz():
                 index = 0
 
                 for i in list(formatted_quiz):
-
+                    try:
                         multiple_questions.append(main_quiz.multiple_answers(formatted_quiz[i]))
                         correct_answer.append(formatted_quiz[i])
                         new_quiz = QuizQuestion(quiz_owner=new_quiz_name.id,
@@ -250,7 +250,8 @@ def quiz():
 
                         db.session.add(new_quiz)
                         db.session.commit()
-
+                    except:
+                        break
                 return redirect(url_for('dashboard'))
 
             else:
