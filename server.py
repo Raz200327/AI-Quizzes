@@ -68,6 +68,7 @@ def home():
     return render_template("index.html")
 
 @app.route("/delete/<id>")
+@login_required
 def delete(id):
     with app.app_context():
         quiz = QuizNames.query.get(id)
@@ -76,6 +77,7 @@ def delete(id):
     return redirect(url_for('dashboard'))
 
 @app.route("/edit/title/<id>", methods=["POST", "GET"])
+@login_required
 def edit_quiz_title(id):
     quiz_name = QuizNames.query.get(id).quiz_name
     form = EditQuiz(quiz_name=quiz_name)
@@ -88,6 +90,7 @@ def edit_quiz_title(id):
     return render_template('edit_quiz_title.html', id=id, form=form, quiz_name=quiz_name)
 
 @app.route("/edit/question/<id>/<index>", methods=["POST", "GET"])
+@login_required
 def edit_quiz_question(id, index):
     quiz_info = QuizQuestion.query.get(id)
     print(quiz_info.correct_answer)
